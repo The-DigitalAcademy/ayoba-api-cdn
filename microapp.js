@@ -269,7 +269,11 @@ function getAyoba() {
     }
 
     if (/android/i.test(userAgent)) {
-        return 'Android';
+        try {
+            return Android;
+        } catch (error) {
+            return null;
+        }
     }
 
     // iOS detection from: http://stackoverflow.com/a/9039885/177710
