@@ -142,54 +142,6 @@ function onPaymentStatusChanged(transactionId, status, error) {
     return handlePaymentStatusChange({transactionId, status, error})
 }
 
-// GET FILE
-try {
-    const getFileInputs = document.querySelectorAll('[data-ayoba-api="getFile"]');
-    for (let i = 0; i < getFileInputs.length; i++) {
-        const inputEle = getFileInputs[i];
-        inputEle.onclick = () => {
-            responseCode = Ayoba.getFile();
-            return responseCode;
-        };
-    }
-} catch (err) {
-    console.log('err', err)
-}
-
-// TAKE PHOTO
-try {
-    const takePictureInputs = document.querySelectorAll('[data-ayoba-api="takePicture"]');
-    for (let i = 0; i < takePictureInputs.length; i++) {
-        const inputEle = takePictureInputs[i];
-        inputEle.onclick = () => {
-            Ayoba.takePicture();
-        };
-    }
-} catch (err) {
-    console.log('err', err);
-}
-
-// START CONVERSATION
-try {
-    const startConversationInputs = document.querySelectorAll('[data-ayoba-api="startConversation"]');
-    for (let i = 0; i < startConversationInputs.length; i++) {
-        const inputEle = startConversationInputs[i];
-        inputEle.onclick = () => {
-            Ayoba.startConversation(inputEle.value);
-        };
-    }
-} catch (err) {
-    console.log('err', err);
-}
-
-try {
-    const submitInputs = document.querySelector('[data-ayoba-api="submit"]');
-    submitInputs.onclick = () => {
-        submit()
-    }
-} catch (err) {
-    console.log('err', err);
-}
 
 
 // ============================================================= FUNCTIONS ============================================================================
