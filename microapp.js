@@ -143,6 +143,7 @@ function onPaymentStatusChanged(transactionId, status, error) {
 }
 
 
+
 // GET FILE
 try {
     const getFileInputs = document.querySelectorAll('[data-ayoba-api="getFile"]');
