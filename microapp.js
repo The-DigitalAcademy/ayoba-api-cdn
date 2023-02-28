@@ -142,8 +142,6 @@ function onPaymentStatusChanged(transactionId, status, error) {
     return handlePaymentStatusChange({transactionId, status, error})
 }
 
-
-
 // GET FILE
 try {
     const getFileInputs = document.querySelectorAll('[data-ayoba-api="getFile"]');
@@ -271,7 +269,7 @@ function getAyoba() {
     }
 
     if (/android/i.test(userAgent)) {
-        return Android;
+        return 'Android';
     }
 
     // iOS detection from: http://stackoverflow.com/a/9039885/177710
