@@ -36,6 +36,8 @@ window.onload = () => {
     } else {
         //Ayoba Environment
     }
+    
+    console.log(Ayoba);
 
     /**
      * returns user's phone number
