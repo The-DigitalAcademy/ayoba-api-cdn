@@ -139,9 +139,25 @@ function closeApp() {
     }
 }
 
+//LOCATION
+function UserLocation() {
+    this.lon = '',
+    this.lat = '',
+    this.customHandler = () => {}
+    this.locationChangeHandler = () => {
+        this.customHandler(this.lon, this.lat)
+    }
+}
 
-var handlePaymentStatusChange = (payload) => { }
+var myLocation = new UserLocation()
+function onLocationChanged(lat, lon) {
+    console.log(myLocation);
+    myLocation.lon = lon
+    myLocation.lat = lat
+    myLocation.locationChangeHandler()
+}
 
+//PAYMENTS
 /**
  * initiate payment process.
  * @param {{method:string, amount:Number, currency: string, description: string }} payload object containing payment details
@@ -161,81 +177,7 @@ function startPayment(payload, successCb, errorCb) {
         else console.error(err);
     }
 }
-/**
- * Ayoba Hook Function
- * @param {string} transactionId 
- * @param {string} status 
- * @param {*} error 
- * @returns {(payload) => {}}
- */
-function onPaymentStatusChanged(transactionId, status, error) {
-    return handlePaymentStatusChange({ transactionId, status, error })
-}
-
-
-
-// ============================================================= FUNCTIONS ============================================================================
-
-function onNicknameChanged(nickname) {
-    const nameInputs = document.querySelectorAll('[data-ayoba-api="name"]');
-    for (let i = 0; i < nameInputs.length; i++) {
-        const inputEle = nameInputs[i];
-        inputEle.value = nickname;
-        inputEle.classList.remove("is-invalid");
-        inputEle.classList.add("is-valid")
-    }
-}
-
-function onPresenceChanged(presence) {
-    const presenceInputs = document.querySelectorAll('[data-ayoba-api="presence"]');
-    for (let i = 0; i < presenceInputs.length; i++) {
-        const inputEle = presenceInputs[i];
-        inputEle.value = presence;
-        inputEle.classList.remove("is-invalid");
-        inputEle.classList.add("is-valid")
-    }
-}
-
-function onAvatarChanged(avatar) {
-    const avatarInputs = document.querySelectorAll('[data-ayoba-api="presence"]');
-    for (let i = 0; i < avatarInputs.length; i++) {
-        const avatarImg = avatarInputs[i];
-        avatarImg.src = avatarImg.tagName.toLowerCase() == 'img' ? avatar : '';
-    }
-}
-
-function onLocationChanged(lat, lon) {
-    const locationInputs = document.querySelectorAll('[data-ayoba-api="location"]');
-    for (let i = 0; i < locationInputs.length; i++) {
-        const inputEle = locationInputs[i];
-        inputEle.value = `lat: ${lat}, lon: ${lon}`;
-        inputEle.classList.remove("is-invalid");
-        inputEle.classList.add("is-valid")
-    }
-}
-
-function onPictureRetrievedResponse(responseCode, picturePath) {
-    var responseCode = responseCode
-    var picturePath = picturePath
-
-    console.log('picture path:', picturePath);
-}
 
 function sendGenericEvent(event) {
     Ayoba.sendGenericEvent(event);
 }
-
-function submit() {
-    var photo = document.querySelector('[data-ayoba-api="files"]').files[0]
-    let formData = new FormData();
-
-    formData.append("files", photo);
-
-    fetch('https://devstrapi.thedigitalacademy.co.za/api/upload', { method: "POST", body: formData }).then((res) => {
-        console.log(res);
-    }).catch((err) => {
-        console.log(err);
-    });
-
-}
-
